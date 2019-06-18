@@ -5,7 +5,6 @@ import {
   Output,
   EventEmitter
 } from "@angular/core";
-import { NumberValueAccessor } from "@angular/forms/src/directives";
 
 @Component({
   selector: "pm-star",
