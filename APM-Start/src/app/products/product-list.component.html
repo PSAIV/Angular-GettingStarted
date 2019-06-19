@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-header"> {{ pageTitle }} </div>
+  <div class="card-header">{{ pageTitle }}</div>
   <div class="card-body">
     <div class="row">
       <div class="col-md-2">Filter by:</div>
@@ -17,7 +17,9 @@
         <thead>
           <tr>
             <th>
-              <button class="btn btn-primary" (click)="toggleImage()"> {{ showImage ? "Hide" : "Show" }} Image </button>
+              <button class="btn btn-primary" (click)="toggleImage()">
+                {{ showImage ? "Hide" : "Show" }} Image
+              </button>
             </th>
             <th>Product</th>
             <th>Code</th>
@@ -29,14 +31,30 @@
         <tbody>
           <tr *ngFor="let product of filteredProducts">
             <td>
-              <img *ngIf="showImage" [src]="product.imageUrl" [title]="product.productName"
-                [style.width.px]="imageWidth" [style.margin.px]="imageMargin" />
+              <img
+                *ngIf="showImage"
+                [src]="product.imageUrl"
+                [title]="product.productName"
+                [style.width.px]="imageWidth"
+                [style.margin.px]="imageMargin"
+              />
             </td>
-            <td>{{ product.productName }}</td>
-            <td>{{ product.productCode | lowercase | convertToSpaces: '-' }}</td>
+            <td>
+              <a [routerLink]="['/products', product.productId]">
+                {{ product.productName }}
+              </a>
+            </td>
+            <td>
+              {{ product.productCode | lowercase | convertToSpaces: "-" }}
+            </td>
             <td>{{ product.releaseDate }}</td>
-            <td>{{product.price | currency }}</td>
-            <td><pm-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'></pm-star></td>
+            <td>{{ product.price | currency }}</td>
+            <td>
+              <pm-star
+                [rating]="product.starRating"
+                (ratingClicked)="onRatingClicked($event)"
+              ></pm-star>
+            </td>
           </tr>
         </tbody>
       </table>
